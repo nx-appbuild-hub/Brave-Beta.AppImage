@@ -11,22 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 PWD:=$(shell pwd)
 
-all:  clean
-	mkdir --parents $(PWD)/build/Boilerplate.AppDir	
+all: clean
+	mkdir --parents $(PWD)/build/Boilerplate.AppDir/brave
 	apprepo --destination=$(PWD)/build appdir boilerplate brave-browser-beta libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0 libreadline8
 
 	cp /tmp/apprepo/brave-browser*beta*.deb $(PWD)/build/build.deb
 	dpkg -x $(PWD)/build/build.deb $(PWD)/build
-	cp -r $(PWD)/build/opt/brave*/brave $(PWD)/build/Boilerplate.AppDir
+	cp -r $(PWD)/build/opt/brave*/brave*/  $(PWD)/build/Boilerplate.AppDir/brave
 
 	echo "LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}:\$${APPDIR}/brave" >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo "export LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}" >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo 'exec $${APPDIR}/brave/brave "$${@}"' >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo "export LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}"            >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo ''                                                       >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo ''                                                       >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo 'exec $${APPDIR}/brave/brave-browser-beta "$${@}"'       >> $(PWD)/build/Boilerplate.AppDir/AppRun
 
 	rm --force $(PWD)/build/Boilerplate.AppDir/*.svg 		|| true
-	rm --force $(PWD)/build/Boilerplate.AppDir/*.desktop    || true
+	rm --force $(PWD)/build/Boilerplate.AppDir/*.desktop            || true
 	rm --force $(PWD)/build/Boilerplate.AppDir/*.png 		|| true
 
 	cp --force $(PWD)/AppDir/*.png 		$(PWD)/build/Boilerplate.AppDir/ || true
