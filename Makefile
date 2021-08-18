@@ -17,7 +17,7 @@ all: clean
 
 	cp /tmp/apprepo/brave-browser*.deb $(PWD)/build/build.deb
 	dpkg -x $(PWD)/build/build.deb $(PWD)/build
-	cp -r $(PWD)/build/opt/brave*/brave*/  $(PWD)/build/Boilerplate.AppDir/brave
+	cp -r $(PWD)/build/opt/brave*/brave*/*  $(PWD)/build/Boilerplate.AppDir/brave
 
 	echo "LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}:\$${APPDIR}/brave" >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo "export LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}"            >> $(PWD)/build/Boilerplate.AppDir/AppRun
